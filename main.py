@@ -33,7 +33,7 @@ for mob in mob_types:
         # Reset temporary list of images
         temp_list = []
         for i in range(4):
-            img = pygame.image.load(f"/Users/fabioyaguinuma/Downloads/starter_files/assets/images/characters/{mob}/{animation}/{i}.png").convert_alpha()
+            img = pygame.image.load(f"assets/images/characters/{mob}/{animation}/{i}.png").convert_alpha()
             img = scale_img(img, constants.SCALE)
             temp_list.append(img)
         animation_list.append(temp_list)
