@@ -1,6 +1,7 @@
 import pygame
 import constants
 from character import Character
+from weapon import Weapon
 
 pygame.init()
 
@@ -21,6 +22,10 @@ def scale_img(image, scale):
     w = image.get_width()
     h = image.get_height()
     return pygame.transform.scale(image, (w * scale, h * scale))
+
+# Load weapon
+bow_image = scale_img(pygame.image.load("assets/images/weapons/bow.png").convert_alpha(), constants.WEAPON_SCALE)
+
 # Load character images
 mob_animations = []
 mob_types = ["elf", "imp", "skeleton", "goblin", "muddy", "tiny_zombie", "big_demon"]
@@ -41,9 +46,12 @@ for mob in mob_types:
 
 
 # =========== Create Player
-player = Character(100, 100, mob_animations, 2)
-# =========== Main game loop
+player = Character(100, 100, mob_animations, 0)
+# Create player's weapon
+bow = Weapon(bow_image)
 
+
+# =========== Main game loop
 run = True
 while run:
     # =========== Control frame rate
@@ -65,12 +73,14 @@ while run:
     # =========== Move Player
     player.move(dx, dy)
     player.update()
+    bow.update(player)
 
     print(f"Player position: x={player.rect.x}, y={player.rect.y}")
 
 
     # =========== Draw player on screen
     player.draw(screen)
+    bow.draw(screen)
 
     # =========== Event handler
     for event in pygame.event.get():
