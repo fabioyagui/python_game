@@ -50,6 +50,12 @@ class Arrow(pygame.sprite.Sprite):
         self.rect.center = (x, y)
         # Calculate the horizontal and vertical based on the angle
         self.dx = math.cos(math.radians(self.angle)) * constants.ARROW_SPEED
-        self.dy = math.sin(math.radians(self.angle)) * constants.ARROW_SPEED
+        self.dy = -(math.sin(math.radians(self.angle)) * constants.ARROW_SPEED)
+    
+    def update(self):
+
+        self.rect.x += self.dx
+        self.rect.y += self.dy
+    
     def draw(self, surface):
         surface.blit(self.image, ((self.rect.centerx - int(self.image.get_width()/2)), self.rect.centery - int(self.image.get_height()/2)))
